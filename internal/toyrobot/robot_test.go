@@ -45,4 +45,29 @@ func Test_Robot_Place(t *testing.T) {
 			assert.Equal(t, otherTransform, returnedTransform)
 		}
 	})
+
+	t.Run("place the robot on another table", func(t *testing.T) {
+		table := NewTable(5, 5)
+		robot := NewRobot("R2D2")
+		transform := NewTransform(1, 1, South)
+
+		{
+			err := robot.Place(&table, transform)
+			assert.NoError(t, err)
+		}
+
+		otherTable := NewTable(3, 3)
+		otherTransform := NewTransform(1, 2, West)
+		if err := robot.Place(&otherTable, otherTransform); assert.NoError(t, err) {
+			assert.Equal(t, &otherTable, robot.container())
+			returnedTransform, err := otherTable.objectTransform(&robot)
+			assert.NoError(t, err)
+			assert.Equal(t, otherTransform, returnedTransform)
+
+			{
+				_, err := table.objectTransform(&robot)
+				assert.ErrorIs(t, err, NotPlacedError)
+			}
+		}
+	})
 }

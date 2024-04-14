@@ -1,8 +1,6 @@
 package toyrobot
 
-const (
-	RobotNotPlacedError = constError("the robot hasn't been placed yet")
-)
+const RobotNotPlacedError = constError("the robot hasn't been placed yet")
 
 type Robot struct {
 	name           string

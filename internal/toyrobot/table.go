@@ -20,6 +20,15 @@ type Table struct {
 	takenPositions mapset.Set[Vec2]
 }
 
+func NewTable(width int, length int) Table {
+	return Table{
+		Width:          width,
+		Length:         length,
+		transforms:     make(map[Object]Transform),
+		takenPositions: mapset.NewSet[Vec2](),
+	}
+}
+
 func (t *Table) placeObject(object Object, transform Transform) error {
 	if object == nil {
 		return NilObjectError

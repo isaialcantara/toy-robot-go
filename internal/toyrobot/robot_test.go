@@ -20,7 +20,7 @@ func Test_Robot_Place(t *testing.T) {
 
 		err := robot.Place(&table, transform)
 		if assert.NoError(t, err) {
-			assert.Equal(t, &table, robot.container())
+			assert.Equal(t, &table, robot.Container())
 			returnedTransform, err := table.objectTransform(&robot)
 			assert.NoError(t, err)
 			assert.Equal(t, transform, returnedTransform)
@@ -39,7 +39,7 @@ func Test_Robot_Place(t *testing.T) {
 
 		otherTransform := NewTransform(2, 0, East)
 		if err := robot.Place(&table, otherTransform); assert.NoError(t, err) {
-			assert.Equal(t, &table, robot.container())
+			assert.Equal(t, &table, robot.Container())
 			returnedTransform, err := table.objectTransform(&robot)
 			assert.NoError(t, err)
 			assert.Equal(t, otherTransform, returnedTransform)
@@ -59,7 +59,7 @@ func Test_Robot_Place(t *testing.T) {
 		otherTable := NewTable(3, 3)
 		otherTransform := NewTransform(1, 2, West)
 		if err := robot.Place(&otherTable, otherTransform); assert.NoError(t, err) {
-			assert.Equal(t, &otherTable, robot.container())
+			assert.Equal(t, &otherTable, robot.Container())
 			returnedTransform, err := otherTable.objectTransform(&robot)
 			assert.NoError(t, err)
 			assert.Equal(t, otherTransform, returnedTransform)

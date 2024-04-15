@@ -3,8 +3,8 @@ package toyrobot
 type Object interface {
 	Name() string
 
-	container() container
-
+	Container() container
+	setContainer(container)
 	Place(container, Transform) error
 	Transform() (Transform, error)
 }

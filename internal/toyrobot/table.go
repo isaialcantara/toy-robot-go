@@ -1,6 +1,8 @@
 package toyrobot
 
 import (
+	"log"
+
 	mapset "github.com/deckarep/golang-set/v2"
 )
 
@@ -34,6 +36,31 @@ func (t *Table) placeObject(object Object, transform Transform) error {
 		return NilObjectError
 	}
 
+	if err := t.addObject(object, transform); err != nil {
+		return err
+	}
+
+	if object.Container() == nil {
+		object.setContainer(t)
+		return nil
+	}
+
+	if object.Container() != t {
+		if err := object.Container().removeObject(object); err != nil {
+			log.Println("object container reference desync")
+		}
+
+		object.setContainer(t)
+	}
+
+	return nil
+}
+
+func (t *Table) addObject(object Object, transform Transform) error {
+	if object == nil {
+		return NilObjectError
+	}
+
 	if !t.contains(transform.Position) {
 		return InvalidPlacementError
 	}
@@ -59,31 +86,14 @@ func (t *Table) placeObject(object Object, transform Transform) error {
 	return nil
 }
 
-func (t *Table) placeObjectOnOther(object Object, container container, transform Transform) error {
-	if object == nil {
-		return NilObjectError
-	}
-
-	if container == nil {
-		return NilContainerError
-	}
-
-	if t == container {
-		if err := t.placeObject(object, transform); err != nil {
-			return err
-		}
-	}
-
-	if err := container.placeObject(object, transform); err != nil {
-		return err
-	}
-
-	if currentTransform, objectAlreadyOnTable := t.transforms[object]; objectAlreadyOnTable {
-		t.takenPositions.Remove(currentTransform.Position)
+func (t *Table) removeObject(object Object) error {
+	if transform, objectAlreadyOnTable := t.transforms[object]; objectAlreadyOnTable {
 		delete(t.transforms, object)
+		t.takenPositions.Remove(transform.Position)
+		return nil
 	}
 
-	return nil
+	return NotPlacedError
 }
 
 func (t Table) objectTransform(object Object) (Transform, error) {

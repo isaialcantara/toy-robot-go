@@ -6,6 +6,7 @@ type Object interface {
 	Container() container
 	setContainer(container)
 	Place(container, Transform) error
+	Remove() error
 	Transform() (Transform, error)
 }
 

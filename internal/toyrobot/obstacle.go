@@ -31,6 +31,14 @@ func (o *Obstacle) Place(container container, transform Transform) error {
 	return container.placeObject(o, transform)
 }
 
+func (o *Obstacle) Remove() error {
+	if o.Container() == nil {
+		return ObstacleNotPlacedError
+	}
+
+	return o.Container().removeObject(o)
+}
+
 func (o *Obstacle) Transform() (Transform, error) {
 	if o.Container() == nil {
 		return Transform{}, ObstacleNotPlacedError

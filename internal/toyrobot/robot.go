@@ -31,6 +31,14 @@ func (r *Robot) Place(container container, transform Transform) error {
 	return container.placeObject(r, transform)
 }
 
+func (r *Robot) Remove() error {
+	if r.Container() == nil {
+		return RobotNotPlacedError
+	}
+
+	return r.Container().removeObject(r)
+}
+
 func (r *Robot) Transform() (Transform, error) {
 	if r.Container() == nil {
 		return Transform{}, RobotNotPlacedError

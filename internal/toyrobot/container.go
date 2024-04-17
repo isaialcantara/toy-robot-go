@@ -1,6 +1,6 @@
 package toyrobot
 
-type container interface {
+type Container interface {
 	placeObject(Object, Transform) error
 	removeObject(Object) error
 	objectTransform(Object) (Transform, error)

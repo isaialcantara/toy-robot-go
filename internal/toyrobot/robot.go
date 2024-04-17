@@ -4,7 +4,7 @@ const RobotNotPlacedError = constError("the robot hasn't been placed yet")
 
 type Robot struct {
 	name      string
-	container container
+	container Container
 }
 
 func NewRobot(name string) Robot {
@@ -15,15 +15,15 @@ func (r Robot) Name() string {
 	return r.name
 }
 
-func (r Robot) Container() container {
+func (r Robot) Container() Container {
 	return r.container
 }
 
-func (r *Robot) setContainer(container container) {
+func (r *Robot) setContainer(container Container) {
 	r.container = container
 }
 
-func (r *Robot) Place(container container, transform Transform) error {
+func (r *Robot) Place(container Container, transform Transform) error {
 	if container == nil {
 		return NilContainerError
 	}

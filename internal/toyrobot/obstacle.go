@@ -1,48 +1,9 @@
 package toyrobot
 
-const ObstacleNotPlacedError = constError("the robot hasn't been placed yet")
-
 type Obstacle struct {
-	name      string
-	container Container
+	Object
 }
 
-func NewObstacle(name string) Obstacle {
-	return Obstacle{name: name}
-}
-
-func (o Obstacle) Name() string {
-	return o.name
-}
-
-func (o Obstacle) Container() Container {
-	return o.container
-}
-
-func (o *Obstacle) setContainer(container Container) {
-	o.container = container
-}
-
-func (o *Obstacle) Place(container Container, transform Transform) error {
-	if container == nil {
-		return NilContainerError
-	}
-
-	return container.placeObject(o, transform)
-}
-
-func (o *Obstacle) Remove() error {
-	if o.Container() == nil {
-		return ObstacleNotPlacedError
-	}
-
-	return o.Container().removeObject(o)
-}
-
-func (o *Obstacle) Transform() (Transform, error) {
-	if o.Container() == nil {
-		return Transform{}, ObstacleNotPlacedError
-	}
-
-	return o.Container().objectTransform(o)
+func NewObstacle() Obstacle {
+	return Obstacle{&object{}}
 }

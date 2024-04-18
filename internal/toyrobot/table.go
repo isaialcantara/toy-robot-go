@@ -40,13 +40,13 @@ func (t *Table) placeObject(object Object, transform Transform) error {
 		return err
 	}
 
-	if object.Container() == nil {
+	if object.container() == nil {
 		object.setContainer(t)
 		return nil
 	}
 
-	if object.Container() != t {
-		if err := object.Container().removeObject(object); err != nil {
+	if object.container() != t {
+		if err := object.container().removeObject(object); err != nil {
 			log.Println("object container reference desync")
 		}
 

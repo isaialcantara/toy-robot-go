@@ -41,7 +41,7 @@ func (d *Direction) RotateLeft() {
 	}
 }
 
-func (d Direction) Step(initial Vec2) Vec2 {
+func (d Direction) Step(initial Position) Position {
 	final := initial
 
 	switch d {

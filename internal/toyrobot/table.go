@@ -19,7 +19,7 @@ type Table struct {
 	Width          int
 	Length         int
 	transforms     map[Object]Transform
-	takenPositions mapset.Set[Vec2]
+	takenPositions mapset.Set[Position]
 }
 
 func NewTable(width int, length int) Table {
@@ -27,7 +27,7 @@ func NewTable(width int, length int) Table {
 		Width:          width,
 		Length:         length,
 		transforms:     make(map[Object]Transform),
-		takenPositions: mapset.NewSet[Vec2](),
+		takenPositions: mapset.NewSet[Position](),
 	}
 }
 
@@ -165,6 +165,6 @@ func (t *Table) rotateObjectRight(object MovableObject) error {
 	return nil
 }
 
-func (t Table) contains(pos Vec2) bool {
+func (t Table) contains(pos Position) bool {
 	return (pos.X >= 0 && pos.X < t.Width) && (pos.Y >= 0 && pos.Y < t.Length)
 }

@@ -46,7 +46,7 @@ func Test_DirectionRotateRight(t *testing.T) {
 }
 
 func Test_DirectionStep(t *testing.T) {
-	directionToFinalPosition := map[Direction]Vec2{
+	directionToFinalPosition := map[Direction]Position{
 		North: {0, 1},
 		East:  {1, 0},
 		South: {0, -1},
@@ -56,7 +56,7 @@ func Test_DirectionStep(t *testing.T) {
 	for direction, finalPosition := range directionToFinalPosition {
 		name := fmt.Sprintf("move position according to direction %s", direction)
 		t.Run(name, func(t *testing.T) {
-			initialPosition := Vec2{0, 0}
+			initialPosition := Position{0, 0}
 			assert.Equal(t, finalPosition, direction.Step(initialPosition))
 		})
 	}

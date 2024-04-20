@@ -68,7 +68,7 @@ func Test_PlaceRobot(t *testing.T) {
 
 				{
 					_, err := table.objectTransform(robot.MovableObject)
-					assert.ErrorIs(t, err, NotPlacedError)
+					assert.ErrorIs(t, err, ObjectNotFoundError)
 				}
 
 			}

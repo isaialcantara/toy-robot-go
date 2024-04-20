@@ -29,7 +29,7 @@ func (m *movableObject) move() error {
 		return NilContainerError
 	}
 
-	return m.container().moveObject(m)
+	return moveObject(m.container(), m)
 }
 
 func (m *movableObject) rotateLeft() error {
@@ -37,7 +37,7 @@ func (m *movableObject) rotateLeft() error {
 		return NilContainerError
 	}
 
-	return m.container().rotateObjectLeft(m)
+	return rotateObjectLeft(m.container(), m)
 }
 
 func (m *movableObject) rotateRight() error {
@@ -45,5 +45,5 @@ func (m *movableObject) rotateRight() error {
 		return NilContainerError
 	}
 
-	return m.container().rotateObjectRight(m)
+	return rotateObjectRight(m.container(), m)
 }

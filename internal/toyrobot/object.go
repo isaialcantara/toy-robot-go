@@ -41,7 +41,7 @@ func (o *object) place(container Container, transform Transform) error {
 		return NilContainerError
 	}
 
-	return container.placeObject(o, transform)
+	return placeObject(container, o, transform)
 }
 
 func (o *object) remove() error {
@@ -49,7 +49,7 @@ func (o *object) remove() error {
 		return NilContainerError
 	}
 
-	return o.container().removeObject(o)
+	return removeObject(o.container(), o)
 }
 
 func (o *object) transform() (Transform, error) {
@@ -57,5 +57,5 @@ func (o *object) transform() (Transform, error) {
 		return Transform{}, NilContainerError
 	}
 
-	return o.container().objectTransform(o)
+	return objectTransform(o.container(), o)
 }

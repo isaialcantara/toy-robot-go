@@ -56,7 +56,7 @@ func Test_PlaceRobot(t *testing.T) {
 		transform := NewTransform(1, 1, South)
 
 		if err := Place(robot, &table, transform); assert.NoError(t, err) {
-			otherTable := NewTable(3, 3)
+			otherTable := NewCircleTable(3)
 			otherTransform := NewTransform(1, 2, West)
 
 			if err := Place(robot, &otherTable, otherTransform); assert.NoError(t, err) {

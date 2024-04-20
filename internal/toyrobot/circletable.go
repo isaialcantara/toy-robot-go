@@ -22,5 +22,5 @@ func NewCircleTable(radius int) CircleTable {
 func (c *CircleTable) inBounds(pos Position) bool {
 	distance := math.Sqrt(float64(pos.X*pos.X) + float64(float64(pos.Y*pos.Y)))
 
-	return distance <= float64(c.Radius)
+	return distance < float64(c.Radius)
 }
